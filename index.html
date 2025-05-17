@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bike Watching</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="global.css" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+    <script src="map.js" type="module"></script>
+    <title>Bikewatching</title>
 </head>
+
 <body>
-    <p>Welcome to the Bike Watching website!</p>
+<main>
+    <header class="header">
+
+        <h1>🚴🏼‍♀️ Boston Bikewatching.</h1>
+
+        <label class="time-filter">
+            Filter by time:
+            <input id="time-slider" type="range" min="-1" max="1440" value="-1">
+            <em id="any-time">(any time)</em>
+            <time id="selected-time">00:00</time>
+        </label>
+
+    </header>
+
+    <br>
+
+    <div id="map">
+        <svg></svg>
+    </div>
+
+</main>
 </body>
+
 </html>
