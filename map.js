@@ -61,7 +61,10 @@ function filterTripsbyTime(trips, timeFilter) {
                 Math.abs(endedMinutes - timeFilter) <= 60
             );
         });
-  }
+}
+
+// Scales the station flow 
+let stationFlow = d3.scaleQuantize().domain([0, 1]).range([0, 0.5, 1]);
 
 // Initialize the map
 const map = new mapboxgl.Map({
@@ -157,7 +160,9 @@ map.on('load', async () => {
                 .text(
                     `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`,
                 );
-          });
+          })
+        .style('--departure-ratio', (d) =>
+            stationFlow(d.departures / d.totalTraffic));
 
     // Function to update circle positions when the map moves/zooms
     function updatePositions() {
@@ -212,7 +217,10 @@ map.on('load', async () => {
         circles
             .data(filteredStations, (d) => d.short_name) 
             .join('circle') // Ensure the data is bound correctly
-            .attr('r', (d) => radiusScale(d.totalTraffic)); // Update circle sizes
+            .attr('r', (d) => radiusScale(d.totalTraffic))
+            .style('--departure-ratio', (d) =>
+                stationFlow(d.departures / d.totalTraffic),
+              );
       }
 
     timeSlider.addEventListener('input', updateTimeDisplay);

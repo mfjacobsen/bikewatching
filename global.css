@@ -51,8 +51,39 @@ header label.time-filter {
 }
 
 #map svg circle {
-    fill-opacity: 60%;
-    fill: steelblue;
-    stroke: white;
+    
     pointer-events: auto;
+    fill-opacity: 60%;
+    stroke: white;
+    --color-departures: steelblue;
+    --color-arrivals: darkorange;
+    --color: color-mix(in oklch,
+            var(--color-departures) calc(100% * var(--departure-ratio)),
+            var(--color-arrivals));
+    fill: var(--color);
 }
+
+.legend {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2em;
+    gap: 0.1em;
+}
+
+.legend>div {
+    flex: 1;
+    text-align: center;
+    color: white;
+    
+
+    --color-departures: steelblue;
+    --color-arrivals: darkorange;
+    --color: color-mix(in oklch,
+            var(--color-departures) calc(100% * var(--departure-ratio)),
+            var(--color-arrivals));
+
+    background-color: var(--color);
+}
+
+
